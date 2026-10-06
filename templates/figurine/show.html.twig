@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ figurine.title }}{% endblock %}
+
+{% block body %}
+    {% set titreCourt = figurine.title|length > 30 ? figurine.title|slice(0, 30) ~ '...' : figurine.title %}
+
+    <div class="show-page">
+        <h1>{{ titreCourt }}</h1>
+
+        {% if figurine.imageName %}
+            <img src="{{ vich_uploader_asset(figurine, 'imageFile') }}" alt="{{ figurine.title }}" class="image-show">
+        {% endif %}
+
+        <p><strong>Titre :</strong> {{ figurine.title }}</p>
+        <p><strong>Description :</strong> {{ figurine.description }}</p>
+        <p><strong>Prix :</strong> {{ figurine.prix|number_format(2, ',', ' ') }} €</p>
+        <p><strong>Auteur :</strong> {{ figurine.user.firstname }} {{ figurine.user.lastname }}</p>
+        <p><strong>Créée le :</strong> {{ figurine.createdAt|ago }}</p>
+        <p><strong>Modifiée  :</strong> {{ figurine.updatedAt|ago }}</p>
+
+        <div class="show-actions">
+            {% if app.user and app.user.isVerified and app.user == figurine.user %}
+                <a href="{{ path('app_figurine_edit', {id: figurine.id}) }}" class="btn">Modifier</a>
+                <a href="{{ path('app_figurine_delete', {id: figurine.id}) }}" class="btn btn-danger"
+                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette figurine ?');">Supprimer</a>
+            {% endif %}
+            <a href="{{ path('app_figurine_index') }}" class="btn">Retour</a>
+        </div>
+    </div>
+{% endblock %}

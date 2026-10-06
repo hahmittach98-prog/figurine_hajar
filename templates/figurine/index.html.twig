@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Figurines{% endblock %}
+
+{% block body %}
+    <h1>Figurines</h1>
+
+    <div class="grid">
+        {% for figurine in figurines %}
+            <article class="card">
+                <a href="{{ path('app_figurine_show', {id: figurine.id}) }}">
+                    {% if figurine.imageName %}
+                        <img src="{{ vich_uploader_asset(figurine, 'imageFile') }}" alt="{{ figurine.title }}">
+                    {% endif %}
+                </a>
+                <h2><a href="{{ path('app_figurine_show', {id: figurine.id}) }}">{{ figurine.title }}</a></h2>
+                <p class="prix">{{ figurine.prix|number_format(2, ',', ' ') }} €</p>
+                <p class="meta">
+                    Par {{ figurine.user.firstname }} {{ figurine.user.lastname }}<br>
+                    Publiée {{ figurine.createdAt|ago }}
+                </p>
+            </article>
+        {% else %}
+            <p>Aucune figurine pour le moment.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+<nav>
+    <a href="{{ path('app_home') }}" class="logo">🗿 Figurines</a>
+
+    <div class="nav-links">
+        <a href="{{ path('app_home') }}">Accueil</a>
+
+        {% if app.user %}
+            <a href="{{ path('app_figurine_index') }}">Figurines</a>
+
+            {% if app.user.isVerified %}
+                <a href="{{ path('app_figurine_create') }}">Ajouter une figurine</a>
+            {% endif %}
+
+            <a href="{{ path('app_account') }}">Mon profil</a>
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        {% else %}
+            <a href="{{ path('app_register') }}">Inscription</a>
+            <a href="{{ path('app_login') }}">Connexion</a>
+        {% endif %}
+    </div>
+</nav>

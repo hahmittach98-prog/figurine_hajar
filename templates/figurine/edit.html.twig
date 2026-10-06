@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une figurine{% endblock %}
+
+{% block body %}
+    <h1>Modifier la figurine</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.prix) }}
+        {{ form_row(form.imageFile) }}
+        <button type="submit" class="btn">Enregistrer les modifications</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_figurine_show', {id: figurine.id}) }}">Retour</a>
+{% endblock %}

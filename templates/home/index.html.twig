@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <section class="hero">
+        <h1>Bienvenue sur Figurines</h1>
+        <p>Découvrez et partagez  vos figurines préférées.</p>
+
+        <a href="{{ path('app_figurine_index') }}" class="btn">Voir les figurines</a>
+
+        {% if not app.user %}
+            <a href="{{ path('app_register') }}" class="btn">Créer un compte</a>
+        {% endif %}
+    </section>
+{% endblock %}
